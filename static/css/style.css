@@ -1,0 +1,50 @@
+body {
+    background-image: url(../static/images/inventory_background.png);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.home-container {
+    background-color: rgb(223, 188, 51);
+    width: 50%;
+    height: 60%;
+    padding: 40px;
+    margin: 0px;
+    background-position: center;
+    float: right;
+    float: left;
+    position: absolute;
+    box-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+nav{
+    background-color: rgb(119, 84, 126);
+}
+
+nav a{
+    font-size: 60px;
+    color: black;
+}
+
+*{
+    margin: 0;
+    list-style: none;
+    text-decoration: none;
+    position: inherit;
+}
+
+nav ul li a{
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    text-transform: uppercase;
+    border-radius: 3px;
+
+}
+a.product,a:hover{
+    background:rgb(71, 45, 77);
+    transition: .5s;
+}
+

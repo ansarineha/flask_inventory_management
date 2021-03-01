@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-compatible" content="ie=edge">
+        <title> {% block title %} {% endblock %} </title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-sm navbar-light">
+            <a href="/" class="navbar-brand"> Viberr </a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"> <a href="/products" class="nav-link"> Products </a></li>
+                    <li class="nav-item"> <a href="/locations" class="nav-link"> Locations </a></li>
+                    <li class="nav-item"> <a href="/movement" class="nav-link"> Movements </a></li>
+                    <li class="nav-item"> <a href="/report" class="nav-link"> Report </a></li>
+                </ul>
+
+            </div>
+            
+        </nav>
+        <div class="base">
+        {% block body %} {% endblock %}
+    </div>
+    </body>
+
+</html>

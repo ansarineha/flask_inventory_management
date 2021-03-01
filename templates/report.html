@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %} Report {% endblock %}
+{% block body %}
+
+<form action="/report" method="POST">
+    <div class="row">
+        <div class="form-group col">
+            <label for="search-by-location"> Search by Location:</label>
+                <select name="search-by-location" id="search-by-location" class="form-control">
+                    <option value="none">None</option>
+                    {% for loc in locations %}
+                    <option value="{{loc.id}}" {% if loc.id == movement.from_location_id%}selected{% endif %}>{{loc.name}}</option>
+                    {% endfor %}
+                </select>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+      <input type="text" class="form-control" id="search" placeholder="search" name="search">
+    </div>
+    <button type="submit" class="btn btn-primary">search</button>
+  </form>
+
+
+
+<div class="container">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <th>Location</th>
+            <th>Product</th>
+            <th>Quantity</th>
+        </thead>
+        {% for row in report %}
+        <tr>
+            <td>{{row.location}}</td>
+            <td>{{row.product}}</td>
+            <td>{{row.quantity}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+</div>
+
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block title %}Product Details{% endblock %}
+{% block body %}
+ 
+<div class="container">
+  <h2>Product</h2>
+  <form action="/products" method="post">
+    <div class="form-group">
+      <label for="product-name"></label>
+      <input type="text" class="form-control" id="products-name" placeholder="product-name" name="product-name">
+    </div>
+    <button type="submit" class="btn btn-primary">Add Product</button>
+  </form>
+
+  {% if error %}
+      <p class="text-danger"><strong>Error:</strong> {{ error }}
+  {% endif %}
+  {% if products.count == 0 %}
+  <h4> There is no product. <br> Please start by adding  new products!!</h4>
+  {% else %}
+
+
+  <!-- Search form -->
+  <div class="row">
+     <div class="col-8">
+     <strong>Search For : {{ tag }}</strong>
+     </div>
+     <div class="col-4">
+      <form action="/products" method="post" autocomplete="off"> 
+      <div class="row">
+       <div class="col-6">
+       <input type="text" class="form-control" name="tag" id="tag"  placeholder="Enter keyword"/> 
+       </div>
+       <div class="col-6" align="left">
+          <input type="submit" value="Search" class="btn btn-primary " name=""> 
+       </div>
+      </form> 
+      </div>
+     </div> 
+
+  
+    <h2>Product Information</h2>
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>NAME</th>
+          <th>ACTION</th>
+        </tr>
+      </thead>
+      {% for product in products.items %}
+    <tr>
+        <td>{{product.id}}</td>
+        <td>{{product.name}}</td>
+        <td>
+            <a href="/products/{{product.id}}/update" >Update</a>
+            <!-- <a href="/products/{{product.id}}/delete" >Delete</a> -->
+        </td>
+    </tr>
+    {% endfor %}
+    </table>
+
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+          {% if products.has_prev %}
+            <li class="page-item"> <a class="page-link" href="{{ url_for('products', page=products.prev_num) }}">Previous</a></li>
+          {% else %}
+            <li class="page-item"><a class="page-link btn disabled" href="#">Previous</a></li>
+          {% endif %}
+
+          {% for page in products.iter_pages(left_edge=3, right_edge=3) %}
+            {% if page %}
+      
+                {% if page==products.page %}
+                  <li class="page-item active"><a class="page-link" href="{{ url_for('products', page=page) }}">{{ page }}</a></li>
+                {% else %}
+                 <li class="page-item"><a class="page-link" href="{{ url_for('products', page=page) }}">{{ page }}</a></li>
+                {% endif %}
+                 
+               {% else %}
+                <li class="page-item disabled" id="example_ellipsis"><a href="#" class="page-link">…</a></li> 
+               {% endif %}
+          
+          
+          {% endfor %}
+
+          {% if products.has_next %}
+            <li class="page-item"> <a class="page-link" href="{{ url_for('products', page=products.next_num) }}">Next</a></li>
+          {% else %}
+            <li class="page-item"><a class="page-link btn disabled" href="#">Next</a></li>
+          {% endif %}
+ 
+      </ul>
+      {% endif %}
+</div>
+  {% endblock %}
